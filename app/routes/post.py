@@ -1,4 +1,5 @@
 from fastapi import APIRouter, Depends, status, HTTPException
+import sqlalchemy as sa
 from sqlalchemy.orm import Session
 from sqlalchemy.exc import SQLAlchemyError
 
@@ -11,16 +12,26 @@ router_post = APIRouter(prefix="/posts", tags=["POSTS"])
 
 @router_post.get("/", status_code=status.HTTP_200_OK, response_model=s.PostList)
 def get_posts(db: Session = Depends(get_db)):
-    posts = db.query(m.Post).filter_by(is_deleted=False).all()
+    posts = db.scalars(sa.select(m.Post).where(m.Post.is_deleted.is_(False))).all()
 
     if not posts:
         raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND, detail="Post not found"
+            status_code=status.HTTP_404_NOT_FOUND, detail="Posts not found"
         )
 
-    posts_out = [s.PostOut(**post.__dict__) for post in posts]
+    return s.PostList(posts=posts)
 
-    return {"posts": posts_out}
+
+@router_post.get("/{post_id}", status_code=status.HTTP_200_OK, response_model=s.PostOut)
+def get_post_by_id(post_id: int, db: Session = Depends(get_db)):
+    post = db.get(m.Post, post_id)
+
+    if not post:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND, detail="No such post"
+        )
+
+    return s.PostOut.model_validate(post)
 
 
 @router_post.post("/", status_code=status.HTTP_201_CREATED, response_model=s.PostOut)

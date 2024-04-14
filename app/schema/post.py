@@ -1,7 +1,4 @@
-from pydantic import (
-    BaseModel,
-    ConfigDict,
-)
+from pydantic import BaseModel, ConfigDict, RootModel
 from datetime import datetime
 
 
@@ -15,8 +12,11 @@ class PostOut(BaseModel):
     updated_date: datetime
 
 
+PostListOut = RootModel[list[PostOut]]
+
+
 class PostList(BaseModel):
-    posts: list[PostOut]
+    posts: PostListOut
 
 
 class PostIn(BaseModel):
