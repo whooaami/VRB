@@ -52,3 +52,8 @@ pytest
 ```bash
 docker-compose -d --build
 ```
+
+9) Test my endpoints using Swagger UI instead of Postman:
+```bash
+http://127.0.0.1:8008/docs
+```
