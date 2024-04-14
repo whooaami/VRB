@@ -131,6 +131,9 @@ venv.bak/
 # Sqlite db
 database-test.db
 
+# MacOS system files
+.DS_Store
+
 # Spyder project settings
 .spyderproject
 .spyproject
