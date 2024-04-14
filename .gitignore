@@ -128,6 +128,9 @@ ENV/
 env.bak/
 venv.bak/
 
+# Sqlite db
+database-test.db
+
 # Spyder project settings
 .spyderproject
 .spyproject
