@@ -12,7 +12,7 @@ Endpoint |HTTP Method | CRUD Method | Result
 
 ## Installation
 
-1) Clone my [repository](https://github.com/whooaami/VRB) to install project:
+1) Clone my [repository](https://github.com/whooaami/fastapi-crud) to install project:
 
 ```bash
 git clone https://github.com/whooaami/VRB
