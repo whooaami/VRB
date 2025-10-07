@@ -1,6 +1,3 @@
-# VRB Tech Task
-
-
 ## Structure
 In a RESTful API, endpoints (URLs) define the structure of the API and how end users access data from our application using the HTTP methods - GET, POST, PUT, DELETE. 
 
